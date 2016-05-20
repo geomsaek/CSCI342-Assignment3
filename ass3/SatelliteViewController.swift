@@ -14,11 +14,6 @@ struct retrievedImages {
     var imageDate : String
 }
 
-struct dObject {
-
-    var imageDate : String
-}
-
 class SatelliteViewController: UIViewController {
 
     let urlComponents = NSURLComponents()
@@ -41,6 +36,7 @@ class SatelliteViewController: UIViewController {
     
     var requestNumber : Int = 10
     var dateCounter : Int = 16
+    var sliderTimeout : Double = 1
     
     @IBOutlet var mapImage: UIImageView!
     @IBOutlet var dateLabel: UILabel!
@@ -50,13 +46,10 @@ class SatelliteViewController: UIViewController {
         super.viewDidLoad()
         
         setLoadingScreen(true)
-        
-        self.longittude = 150.8931239
-        self.latitude = -34.424984
-        
         self.performNASARequestSequence()
     }
     
+    // set the loading screen
     func setLoadingScreen(display: Bool){
         
         if display {
@@ -90,6 +83,8 @@ class SatelliteViewController: UIViewController {
     }
     
     
+    // creates the dates to send to the NASA request method
+    
     func performNASARequestSequence(){
         
         var curDate = self.dateCounter * self.requestNumber
@@ -109,14 +104,11 @@ class SatelliteViewController: UIViewController {
             
         }
         
-        
     }
     
     // perform the NASA Request
     
     func performNASARequest(date : NSDate){
-        
-        
         
         urlComponents.scheme = "https"
         urlComponents.host = "api.nasa.gov"
@@ -175,13 +167,14 @@ class SatelliteViewController: UIViewController {
 
     }
     
+    // checks that all the images have been received before calling the image slider function
     func checkCount(){
     
         if self.imageCounter == self.requestNumber {
              self.organiseDates()
             
              dispatch_async(dispatch_get_main_queue(), {
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.slideImage), userInfo:  nil, repeats: true)
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(self.sliderTimeout, target: self, selector: #selector(self.slideImage), userInfo:  nil, repeats: true)
                 self.setLoadingScreen(false)
             })
         }
@@ -222,6 +215,7 @@ class SatelliteViewController: UIViewController {
         
     }
     
+    // changes the main map image
     func slideImage(){
 
         self.mapImage.image = self.storeImage[self.slideShowCount].imageObject
@@ -272,17 +266,10 @@ class SatelliteViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+// extension to allow for searching for a character within a string
+// returns the index of character that is found
 
 extension String {
     func indexOf(string: String) -> String.Index {

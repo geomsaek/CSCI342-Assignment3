@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C93CD8B51CEC493900FDBD3E /* SatelliteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93CD8B41CEC493900FDBD3E /* SatelliteViewController.swift */; };
-		C9B0310F1CEEFF9700E0925E /* default.gif in Resources */ = {isa = PBXBuildFile; fileRef = C9B0310E1CEEFF9700E0925E /* default.gif */; };
+		C9B031111CEF03A300E0925E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B031101CEF03A300E0925E /* MapViewController.swift */; };
+		C9B031131CEF04FF00E0925E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B031121CEF04FF00E0925E /* MapKit.framework */; };
 		C9BA006E1CEC3EFD008638EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BA006D1CEC3EFD008638EA /* AppDelegate.swift */; };
 		C9BA00731CEC3EFD008638EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9BA00711CEC3EFD008638EA /* Main.storyboard */; };
 		C9BA00751CEC3EFD008638EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9BA00741CEC3EFD008638EA /* Assets.xcassets */; };
@@ -17,7 +18,8 @@
 
 /* Begin PBXFileReference section */
 		C93CD8B41CEC493900FDBD3E /* SatelliteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatelliteViewController.swift; sourceTree = "<group>"; };
-		C9B0310E1CEEFF9700E0925E /* default.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = default.gif; sourceTree = "<group>"; };
+		C9B031101CEF03A300E0925E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		C9B031121CEF04FF00E0925E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C9BA006A1CEC3EFD008638EA /* ass3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ass3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BA006D1CEC3EFD008638EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BA00721CEC3EFD008638EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9B031131CEF04FF00E0925E /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 		C9BA00611CEC3EFD008638EA = {
 			isa = PBXGroup;
 			children = (
+				C9B031121CEF04FF00E0925E /* MapKit.framework */,
 				C9BA006C1CEC3EFD008638EA /* ass3 */,
 				C9BA006B1CEC3EFD008638EA /* Products */,
 			);
@@ -56,13 +60,13 @@
 		C9BA006C1CEC3EFD008638EA /* ass3 */ = {
 			isa = PBXGroup;
 			children = (
-				C9B0310E1CEEFF9700E0925E /* default.gif */,
+				C9B031101CEF03A300E0925E /* MapViewController.swift */,
+				C93CD8B41CEC493900FDBD3E /* SatelliteViewController.swift */,
 				C9BA006D1CEC3EFD008638EA /* AppDelegate.swift */,
 				C9BA00711CEC3EFD008638EA /* Main.storyboard */,
 				C9BA00741CEC3EFD008638EA /* Assets.xcassets */,
 				C9BA00761CEC3EFD008638EA /* LaunchScreen.storyboard */,
 				C9BA00791CEC3EFD008638EA /* Info.plist */,
-				C93CD8B41CEC493900FDBD3E /* SatelliteViewController.swift */,
 			);
 			path = ass3;
 			sourceTree = "<group>";
@@ -99,6 +103,11 @@
 				TargetAttributes = {
 					C9BA00691CEC3EFD008638EA = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -125,7 +134,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9B0310F1CEEFF9700E0925E /* default.gif in Resources */,
 				C9BA00781CEC3EFD008638EA /* LaunchScreen.storyboard in Resources */,
 				C9BA00751CEC3EFD008638EA /* Assets.xcassets in Resources */,
 				C9BA00731CEC3EFD008638EA /* Main.storyboard in Resources */,
@@ -140,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C93CD8B51CEC493900FDBD3E /* SatelliteViewController.swift in Sources */,
+				C9B031111CEF03A300E0925E /* MapViewController.swift in Sources */,
 				C9BA006E1CEC3EFD008638EA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
