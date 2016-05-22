@@ -31,6 +31,7 @@ class SatelliteViewController: UIViewController {
     var overlayView = UIView()
     var overlay : UIView?
     var activityIndicator = UIActivityIndicatorView()
+    var imageload : UILabel?
     
     var storeImage = [retrievedImages]()
     
@@ -54,11 +55,25 @@ class SatelliteViewController: UIViewController {
         
         if display {
             
+            // create a text label to display the download status
+            
+            imageload = UILabel(frame: CGRectMake(0,0,300,21))
+            imageload!.center = CGPointMake(185, 395)
+            imageload!.textAlignment = NSTextAlignment.Center
+            let tempString = "Downloading image " + String(self.imageCounter) + " of " + String(self.requestNumber)
+            imageload!.text = tempString
+            imageload!.textAlignment = NSTextAlignment.Center
+            imageload!.textColor = UIColor(white: 0xFFFFFFF, alpha: 1)
+            
+            // set the background colour
+            
             overlay = UIView(frame: view.frame)
             overlay!.backgroundColor = UIColor.blackColor()
             overlay!.alpha = 0.8
             
             view.addSubview(overlay!)
+            
+            // create a loading box gif
             
             overlayView.frame = CGRectMake(0, 0, 80, 80)
             overlayView.center = view.center
@@ -72,13 +87,14 @@ class SatelliteViewController: UIViewController {
             
             overlayView.addSubview(activityIndicator)
             view.addSubview(overlayView)
+            view.addSubview(imageload!)
             
             activityIndicator.startAnimating()
         }else {
-
             overlay?.removeFromSuperview()
             activityIndicator.stopAnimating()
             overlayView.removeFromSuperview()
+            imageload?.removeFromSuperview()
         }
     }
     
@@ -137,12 +153,13 @@ class SatelliteViewController: UIViewController {
                 
                 do{
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    
                     let imageURL = json["url"] as! String
                     let date = json["date"] as! String
                     
                     let found = date.indexOf("T")
                     let dateSub = date.substringToIndex(found)
-                    
+
                     self.fetchImage(imageURL, date: dateSub)
                     
                 }catch {
@@ -163,6 +180,15 @@ class SatelliteViewController: UIViewController {
         let temp = retrievedImages(imageObject: UIImage(data: data)!, imageDate: date)
         self.storeImage.append(temp)
         self.imageCounter += 1
+        
+        // update the loading message
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            let tempString = "Downloading image " + String(self.imageCounter) + " of " + String(self.requestNumber)
+            self.imageload!.text = tempString
+            self.view.addSubview(self.imageload!)
+        })
+        
         self.checkCount()
 
     }
